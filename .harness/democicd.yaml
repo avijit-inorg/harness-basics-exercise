@@ -83,7 +83,7 @@ pipeline:
                   identifier: publishing_to_docker_hub
                   spec:
                     connectorRef: account.harnessImage
-                    image: alpine:latest
+                    image: docker:latest
                     shell: Sh
                     command: |-
                       docker build -t avijitinorg/harness-demo .
