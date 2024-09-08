@@ -86,3 +86,4 @@ pipeline:
                     repo: avijitinorg/harness-demo
                     tags:
                       - latest
+                    runAsUser: "0"
