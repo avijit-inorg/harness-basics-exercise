@@ -66,3 +66,23 @@ pipeline:
                 - AllErrors
               action:
                 type: Abort
+    - stage:
+        name: publish
+        identifier: publish
+        description: ""
+        type: CI
+        spec:
+          cloneCodebase: true
+          infrastructure:
+            useFromStage: build
+          execution:
+            steps:
+              - step:
+                  type: BuildAndPushDockerRegistry
+                  name: pushing image to docker
+                  identifier: pushing_image_to_docker
+                  spec:
+                    connectorRef: account.harnessImage
+                    repo: avijitinorg/harness-demo
+                    tags:
+                      - latest
