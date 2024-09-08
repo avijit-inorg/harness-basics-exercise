@@ -78,14 +78,13 @@ pipeline:
           execution:
             steps:
               - step:
-                  type: BuildAndPushDockerRegistry
-                  name: pushing image to docker
-                  identifier: pushing_image_to_docker
+                  type: Run
+                  name: publishing to docker hub
+                  identifier: publishing_to_docker_hub
                   spec:
                     connectorRef: account.harnessImage
-                    repo: avijitinorg/harness-demo
-                    tags:
-                      - latest
-                    buildArgs:
-                      docker-username: avijitinorg
-                    runAsUser: "0"
+                    image: alpine:latest
+                    shell: Sh
+                    command: |-
+                      docker build -t avijitinorg/harness-demo .
+                      docker push avijitinorg/harness-demo
