@@ -18,7 +18,13 @@ pipeline:
         spec:
           cloneCodebase: true
           infrastructure:
-            useFromStage: build
+            type: KubernetesDirect
+            spec:
+              connectorRef: KubernetesConnector
+              namespace: "harness-delegate-ng "
+              automountServiceAccountToken: true
+              nodeSelector: {}
+              os: Linux
           execution:
             steps:
               - step:
