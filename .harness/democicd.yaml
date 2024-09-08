@@ -86,4 +86,6 @@ pipeline:
                     repo: avijitinorg/harness-demo
                     tags:
                       - latest
+                    buildArgs:
+                      docker-username: avijitinorg
                     runAsUser: "0"
