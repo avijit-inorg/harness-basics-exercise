@@ -11,6 +11,62 @@ pipeline:
         build: <+input>
   stages:
     - stage:
+        name: build
+        identifier: build
+        description: ""
+        type: CI
+        spec:
+          cloneCodebase: true
+          infrastructure:
+            type: KubernetesDirect
+            spec:
+              connectorRef: KubernetesConnector
+              namespace: harness-delegate-ng
+              automountServiceAccountToken: true
+              nodeSelector: {}
+              os: Linux
+          execution:
+            steps:
+              - step:
+                  type: Run
+                  name: Build
+                  identifier: Build
+                  spec:
+                    connectorRef: account.harnessImage
+                    image: amazoncorretto:latest
+                    shell: Sh
+                    command: javac HelloWorld.java
+    - stage:
+        name: test
+        identifier: test
+        description: ""
+        type: CI
+        spec:
+          cloneCodebase: true
+          infrastructure:
+            useFromStage: build
+          execution:
+            steps:
+              - step:
+                  type: Semgrep
+                  name: code scan test
+                  identifier: code_scan_test
+                  spec:
+                    mode: orchestration
+                    config: default
+                    target:
+                      type: repository
+                      detection: auto
+                    advanced:
+                      log:
+                        level: info
+        failureStrategies:
+          - onFailure:
+              errors:
+                - AllErrors
+              action:
+                type: Abort
+    - stage:
         name: publish
         identifier: publish
         description: ""
