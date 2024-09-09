@@ -28,14 +28,11 @@ pipeline:
           execution:
             steps:
               - step:
-                  type: Run
-                  name: publishing to docker hub
-                  identifier: publishing_to_docker_hub
+                  type: BuildAndPushDockerRegistry
+                  name: BuildAndPush
+                  identifier: BuildAndPush
                   spec:
                     connectorRef: account.harnessImage
-                    image: docker:latest
-                    shell: Sh
-                    command: |-
-                      sudo systemctl start docker
-                      docker build -t avijitinorg/harness-demo .
-                      docker push avijitinorg/harness-demo
+                    repo: avijitinorg/harness-demo
+                    tags:
+                      - latest
