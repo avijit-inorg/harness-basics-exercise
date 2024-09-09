@@ -1,0 +1,14 @@
+inputSet:
+  name: git-trigger-pr
+  identifier: gittriggerpr
+  orgIdentifier: default
+  projectIdentifier: DemoProject
+  pipeline:
+    identifier: democicd
+    properties:
+      ci:
+        codebase:
+          build:
+            type: PR
+            spec:
+              number: <+trigger.prNumber>
