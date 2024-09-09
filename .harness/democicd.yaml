@@ -36,3 +36,5 @@ pipeline:
                     repo: avijitinorg/harness-demo
                     tags:
                       - latest
+                    envVariables:
+                      docker-username: avijitinorg
