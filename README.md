@@ -1,2 +1,1 @@
-# This is the content.
-## This is another content.
+# This other content.
