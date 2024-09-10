@@ -1,0 +1,14 @@
+inputSet:
+  name: default-input-set
+  identifier: defaultinputset
+  orgIdentifier: default
+  projectIdentifier: DemoProject
+  pipeline:
+    identifier: demobuild
+    properties:
+      ci:
+        codebase:
+          build:
+            type: branch
+            spec:
+              branch: <+trigger.branch>
